@@ -1,11 +1,11 @@
-# Better Cave Dweller – Minecraft 26.3 port (Fabric + GeckoLib 5)
+# Better Cave Dweller – Minecraft 26.3 Fabric port (Fabric + GeckoLib 5)
 
 **Status: UNCOMPILED DRAFT.** Ported from the decompiled 1.20.1 source without access to Minecraft, Fabric or
 GeckoLib jars, so nothing here has been built or run. Expect a few compiler errors on the first build.
 
 ## Build
 Needs Java 25.
-- Local: install Gradle, run `gradle wrapper` once, then `./gradlew build`. Jar: `build/libs/better-cave-dweller-2.0.0.jar`.
+- Local: install Gradle, run `gradle wrapper` once, then `./gradlew build`. Jar: `build/libs/Better_Cave_Dweller-26.3-fabric.jar`.
 - No install: push this folder to a GitHub repo; `.github/workflows/build.yml` builds the jar (Actions -> artifact).
 
 ## Server install
@@ -43,3 +43,8 @@ AND on every client (the entity has a client renderer). Config: `config/cave_dwe
 3. `snapTo`, `doHurtTarget(ServerLevel, Entity)`, `SpawnEggItem` + `Item.Properties#spawnEgg`, `EntityRendererRegistry`.
 4. `createPath`, `getNearestPlayer(x,y,z,dist,Predicate)` signatures; `Level#getMinY` not used.
 Paste compiler errors back into the chat and they can be fixed one by one.
+
+## Credits & license
+Port of Better Cave Dweller (MIT). Original work by Schpalrbo (cave noise), SiverDX (Cave Dweller evolved) and
+Scorchy (sound overhaul), as credited on the original Modrinth page. See LICENSE: the original copyright notice
+must stay with this port and any redistribution.
