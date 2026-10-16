@@ -22,6 +22,7 @@ import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeInstance;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
@@ -165,6 +166,9 @@ public class CaveDwellerEntity extends Monster implements GeoEntity {
                         && !Utils.blocksMotion(level, new BlockPos(x, y + 1, z))
                         && !Utils.blocksMotion(level, new BlockPos(x, y + 2, z))
                         && Utils.blocksMotion(level, new BlockPos(x, y - 1, z))) {
+                    // Final safety net: his real hitbox must not touch any block or liquid at this spot
+                    this.setPos(x + 0.5, y, z + 0.5);
+                    if (!level.noCollision(this) || level.containsAnyLiquid(this.getBoundingBox())) break;
                     return new Vec3(x + 0.5, y, z + 0.5);
                 }
             }
@@ -175,6 +179,12 @@ public class CaveDwellerEntity extends Monster implements GeoEntity {
     @Override
     protected boolean canRide(@NotNull Entity vehicle) {
         return ServerConfig.ALLOW_RIDING && super.canRide(vehicle);
+    }
+
+    /** He squeezes through tight gaps and breaks blocks, so being inside a block must never hurt him. */
+    @Override
+    public boolean isInvulnerableTo(@NotNull ServerLevel level, @NotNull DamageSource source) {
+        return source.is(DamageTypes.IN_WALL) || super.isInvulnerableTo(level, source);
     }
 
     /** Replaces the old MixinLivingEntity#travel(HEAD) cancel. */
