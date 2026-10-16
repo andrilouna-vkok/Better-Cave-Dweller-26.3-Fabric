@@ -1,7 +1,7 @@
 # Better Cave Dweller – Minecraft 26.3 Fabric port (Fabric + GeckoLib 5)
 
-**Status: UNCOMPILED DRAFT.** Ported from the decompiled 1.20.1 source without access to Minecraft, Fabric or
-GeckoLib jars, so nothing here has been built or run. Expect a few compiler errors on the first build.
+**Status: UNCOMPILED DRAFT.** Ported from the decompiled 1.20.1 source ~~without access to Minecraft~~, ~~Fabric or
+GeckoLib jars~~, so nothing here has been built or ~~run~~.~~Expect a few compiler errors on the first build.~~
 
 ## Build
 Needs Java 25.
@@ -37,12 +37,12 @@ AND on every client (the entity has a client renderer). Config: `config/cave_dwe
 - Spelunker light check simplified (raw sky light, 0 at night).
 
 ## Most likely compile problems (verify first)
-1. GeckoLib 5 import paths in `CaveDwellerEntity` and `CaveDwellerRenderer` (`com.geckolib...`) were guessed.
-   `withScale`, `withRenderLayer`, `AutoGlowingGeoLayer<>`, `AnimationTest`, `PlayState`, `thenLoop/thenPlayAndHold` unverified.
+~~1. GeckoLib 5 import paths in `CaveDwellerEntity` and `CaveDwellerRenderer` (`com.geckolib...`) were guessed.
+   `withScale`, `withRenderLayer`, `AutoGlowingGeoLayer<>`, `AnimationTest`, `PlayState`, `thenLoop/thenPlayAndHold` unverified.~~
 2. `isAggressive()` stands in for an unidentified intermediary method (`method_6510`) used in the chase goal/tick.
-3. `snapTo`, `doHurtTarget(ServerLevel, Entity)`, `SpawnEggItem` + `Item.Properties#spawnEgg`, `EntityRendererRegistry`.
+~~3. `snapTo`, `doHurtTarget(ServerLevel, Entity)`, `SpawnEggItem` + `Item.Properties#spawnEgg`, `EntityRendererRegistry`.~~
 4. `createPath`, `getNearestPlayer(x,y,z,dist,Predicate)` signatures; `Level#getMinY` not used.
-Paste compiler errors back into the chat and they can be fixed one by one.
+~~Paste compiler errors back into the chat and they can be fixed one by one.~~
 
 ## Credits & license
 Port of Better Cave Dweller (MIT). Original work by Schpalrbo (cave noise), SiverDX (Cave Dweller evolved) and
